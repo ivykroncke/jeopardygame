@@ -2,33 +2,32 @@
 //select the 'messagebar' element and change the text to a stored variable that contains a string
 $(() => {
 
-    //maybe an object is the best way to store these?
-const janswers = [
-    {question: 'This cat loves lasagne', answer: 'who is garfield?'},
+
+let selectedAnswer = '' // holds the value of the number clicked
+const allAnswers = [
+    {question: 'This cat loves lasagna', answer: 'who is garfield?'},
     {question: 'This dog saves little boys out of wells', answer: 'who is lassie?'},
     {question: 'All dogs go to this place', answer: 'what is heaven?'}
 ];
 
-let userClick = false;
-const MessageBar = () => {
-    if (userClick === true){
-        $('.messagebar p').text('You clicked on an answer!')
-    } else
-    //find that corresponding value in the array 
-    //and display it in the message bar
-    //else
+let userClick = false; //default value
+const messageBar = () => { //run this function
+    if (userClick === true){ //if the button has been clicked do this instead
+        $('.messagebar p').text('The answer will be here!')
+        console.log(selectedAnswer)
+    } else {
     $('.messagebar p').text('Player One, Your Turn!')
+    }
 } 
-MessageBar()
+messageBar() //run the funnction
 
-// $( "#dataTable tbody" ).on( "click", "tr", function() {
-//     console.log( $( this ).text() );
-//   });
 
+//click event - calls the messageBar function
 $('.answerbox').on('click', 'p', function() {
-    console.log( $( this ).text())
-    userClick = true
-    MessageBar()
+    selectedAnswer = ( $( this ))
+    // selectedAnswer = ( $( this ).text())
+    userClick = true //changes the status for a diff result in messageBar
+    messageBar() //runs the function
 })
 
 
