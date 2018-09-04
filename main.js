@@ -2,7 +2,6 @@
 //select the 'messagebar' element and change the text to a stored variable that contains a string
 $(() => {
 
-
 let selectedAnswer = '' // holds the value of the number clicked
 const allAnswers = [
     {question: 'This cat loves lasagna', answer: 'who is garfield?'},
@@ -10,11 +9,10 @@ const allAnswers = [
     {question: 'All dogs go to this place', answer: 'what is heaven?'}
 ];
 
-let userClick = false; //default value
-const messageBar = () => { //run this function
-    if (userClick === true){ //if the button has been clicked do this instead
+let userClick = false;
+const messageBar = () => {
+    if (userClick === true){ 
         $('.messagebar p').text('The answer will be here!')
-        console.log(selectedAnswer)
     } else {
     $('.messagebar p').text('Player One, Your Turn!')
     }
@@ -23,13 +21,15 @@ messageBar() //run the funnction
 
 
 //click event - calls the messageBar function
-$('.answerbox').on('click', 'p', function() {
-    selectedAnswer = ( $( this ))
-    // selectedAnswer = ( $( this ).text())
+$('.answerbox').on('click', function($event) {
+    thisElement = $event.target.id
+    console.log(thisElement)
+
     userClick = true //changes the status for a diff result in messageBar
     messageBar() //runs the function
+
 })
 
 
-// STOP DELETING THIS!!!! ITS FOR YOUR ENTIRE JS FILE!
+// STOP DELETING THESE BELOW!!!! ITS FOR YOUR ENTIRE JS FILE!
 })
