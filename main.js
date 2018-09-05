@@ -39,22 +39,28 @@ $(() => {
         messageBar()
     }
 
+    //create Question
+    let createQuestion = () => {
+        let input = `
+        <p>${questionDisplay}</p>
+        <p>${correctAnswer}</p>
+        <p>${incorrectAnswer1}</p>
+        <p>${incorrectAnswer2}</p>
+        <p>${incorrectAnswer3}</p>`
+        currentQuestion = input
+    }
+
     //Message Bar Change 
+    let currentQuestion
     let userClick = false;
     const messageBar = () => {
         if (userClick === true) {
-            $('.messagebar p').text(questionDisplay)
-            $('.messagebar p').append(` A. ${correctAnswer} B. ${incorrectAnswer1} C. ${incorrectAnswer2} D. ${incorrectAnswer3}`) //need to randomize these...
-            $(`.messagebar p`).on('click', function ($event) {
-                console.log($event.target)
-                if ($event.target !== `${correctAnswer}`) {
-                    console.log('wrong answer') //and trigger wrong answer response
-                } else console.log('right answer') //and trigger right answer response
-            })
-        } else {$('.messagebar p').text('Player 1, Please Select a Square to Begin!')
+            createQuestion()
+            $('.messagebar p').html(currentQuestion)
         }
     }
     messageBar()
+
 
     const incorrectUserResponse = () => {
         $('.messagebar p').text('Your answer was incorrect!')
