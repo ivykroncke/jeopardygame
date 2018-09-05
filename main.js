@@ -5,19 +5,20 @@ $(() => {
     let selectedAnswer = '' // holds the value of the number clicked
     const allAnswers = [
         //Category 1
-        { 'id': 'cat1-1', 'points': '$500', 'question': 'This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat2-1', 'points': '$500', 'question': 'This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat3-1', 'points': '$500', 'question': 'All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat1-1', 'points': '$500', 'question': 'Answer: This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat2-1', 'points': '$500', 'question': 'Answer: This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat3-1', 'points': '$500', 'question': 'Answer: All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
         //Category 2
-        { 'id': 'cat1-2', 'points': '$750', 'question': 'This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat2-2', 'points': '$750', 'question': 'This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat3-2', 'points': '$750', 'question': 'All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat1-2', 'points': '$750', 'question': 'Answer: This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat2-2', 'points': '$750', 'question': 'Answer: This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat3-2', 'points': '$750', 'question': 'Answer: All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
         //Category 3
-        { 'id': 'cat1-3', 'points': '$1000', 'question': 'This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat2-3', 'points': '$1000', 'question': 'This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
-        { 'id': 'cat3-3', 'points': '$1000', 'question': 'All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' }
+        { 'id': 'cat1-3', 'points': '$1000', 'question': 'Answer: This cat loves lasagna', 'answer': 'who is garfield?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat2-3', 'points': '$1000', 'question': 'Answer: This dog saves little boys out of wells', 'answer': 'who is lassie?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' },
+        { 'id': 'cat3-3', 'points': '$1000', 'question': 'Answer: All dogs go to this place', 'answer': 'what is heaven?', 'incorrectAnswer1': 'wrong', 'incorrectAnswer2': 'wrong', 'incorrectAnswer3': 'wrong' }
     ]
 
+    //Hold Running Player Totals
     let playerOneTotal = 0
     let PlayerTwoTotal = 0
 
@@ -39,18 +40,20 @@ $(() => {
         messageBar()
     }
 
-    //create Question
+    //Creates the question by putting the elements together
     let createQuestion = () => {
         let input = `
         <p>${questionDisplay}</p>
-        <p>${correctAnswer}</p>
-        <p>${incorrectAnswer1}</p>
-        <p>${incorrectAnswer2}</p>
-        <p>${incorrectAnswer3}</p>`
+        <div>
+            <p class='answerChoice'>${correctAnswer}</p>
+            <p class='answerChoice'>${incorrectAnswer1}</p>
+            <p class='answerChoice'>${incorrectAnswer2}</p>
+            <p class='answerChoice'>${incorrectAnswer3}</p>
+        </div>`
         currentQuestion = input
     }
 
-    //Message Bar Change 
+    //Handles the Message Bar Changes
     let currentQuestion
     let userClick = false;
     const messageBar = () => {
@@ -61,22 +64,26 @@ $(() => {
     }
     messageBar()
 
-
+    //Case for User Selecting Correct Response
     const incorrectUserResponse = () => {
         $('.messagebar p').text('Your answer was incorrect!')
             // !Current Player turn
             //start the squareAnswered function for the question's corresponding square
     }
 
+    //Case for User Selecting Incorrect Response
     const correctUserResponse = () => {
         $('.messagebar p').text('Correct!')
             // Add amount for question to current player
             //start the squareAnswered function for the question's corresponding square
     }
 
+    //Converts square to Blank/Unavailable
     const squareAnswered = () => {
         //if the square has been answered, change the state of the square
     }
+
+    //CLICK EVENTS!
 
     //click event - calls the messageBar function
     $('.answerbox').on('click', function ($event) {
@@ -84,8 +91,22 @@ $(() => {
         userClick = true //changes the status for a diff result in messageBar
         findQuestion()
         messageBar() //runs the function
+        console.log('you clicked an answer box')
     })
+    
+    // $('.answerChoice').on('click', function ($event) {
+    //     console.log($event.target)
+    // })
 
+    // let clickForChoices = () => {
+
+            $('.messagebar p').on('click', '.answerChoice', function ($event) {
+                console.log('you made a selection!')
+        })
+    
+    // }
+    // }
+    // clickForChoices()
 
     // DO NOT DELETE THESE BELOW!
 })
