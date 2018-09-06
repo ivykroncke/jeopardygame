@@ -12,7 +12,7 @@ $(() => {
         { id: 'cat3-1', points: 400, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', 'incorrectAnswer1': 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
         { id: 'cat4-1', points: 400, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', 'incorrectAnswer1': 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
         { id: 'cat5-1', points: 400, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', 'incorrectAnswer1': 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-   
+
         //$800 Questions
         { id: 'cat1-2', points: 800, question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
         { id: 'cat2-2', points: 800, question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
@@ -49,15 +49,14 @@ $(() => {
     let playerTwoTotal = 0
 
     //PLAYER TURN TRACKER
-
     let squaresAnswered = 0
     let turnTracker = ['Player One', 'Player Two']
     let currentPlayer = turnTracker[0]
 
     const turnChanger = () => {
-        if(squaresAnswered % 2 === 0){
+        if (squaresAnswered % 2 === 0) {
             currentPlayer = turnTracker[1]
-        } else {currentPlayer = turnTracker[0]}
+        } else { currentPlayer = turnTracker[0] }
     }
 
     //Retrieves data from Array from User Click Information
@@ -108,30 +107,31 @@ $(() => {
 
     //Answer Checker
     let userResponseChoice
-    let responseCorrectness
     const checkResponse = () => {
         let correctAnswer = allAnswers[matchIndex].answer
         if (userResponseChoice == correctAnswer) {
             correctUserResponse()
-            console.log('match')
         } else {
-            responseCorrectness =
-                incorrectUserResponse()
+            incorrectUserResponse()
         }
     }
 
     //If Correct Response
     const correctUserResponse = () => {
-        console.log(currentPlayer)
+        //only deal with points in the correctUserResponse function
         const addPoints = () => {
-            if(currentPlayer === turnTracker[0]){
-            playerOneTotal += allAnswers[matchIndex].points}
-        else {playerTwoTotal += allAnswers[matchIndex].points}}
+            //adds points to the player whose turn it is
+            if (currentPlayer === turnTracker[0]) {
+                playerOneTotal += allAnswers[matchIndex].points
+            }
+            else {
+                playerTwoTotal += allAnswers[matchIndex].points
+            }
+        }
         addPoints()
-        turnChanger() //this was the first line in the function
-        $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`) //this was the second line int he function
-        squaresAnswered++
-        updateDisplay()
+        turnChanger()
+        $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`)
+        updateDisplay() //only needed in correct
         isGameOver()
     }
 
@@ -139,7 +139,7 @@ $(() => {
     const incorrectUserResponse = () => {
         turnChanger()
         $('.messagebar p').text(`Incorrect! ${currentPlayer}, select an answer to continue.`)
-        squaresAnswered++
+        isGameOver()
     }
 
     //Update Score Display on Page
@@ -150,14 +150,25 @@ $(() => {
 
     //Determine if Game is Over
     const isGameOver = () => {
-        if (squaresAnswered === 20) {
+        squaresAnswered++
+        console.log(squaresAnswered)
+        if (squaresAnswered === 3) {
             if (playerOneTotal > playerTwoTotal) {
-                alert('playerOne wins!')
+                $('.messagebar p').html(`
+                <p>Player One Wins!</p>
+                <p id='playAgain'>Click to play again.</p>`)
             } else {
-                alert('playertwo wins!')
+                $('.messagebar p').html(`
+                <p>Player One Wins!</p>
+                <p id='playAgain'>Click to play again.</p>`)
             }
-        }
+        } //if squaresAnswered < 25, no action
     }
+
+
+    // const gameReset = () => {
+
+    // }
 
     //CLICK EVENTS!
 
@@ -175,7 +186,6 @@ $(() => {
         userResponseChoice = ($event.target).innerHTML;
         checkResponse()
     })
-
 
 
 })
