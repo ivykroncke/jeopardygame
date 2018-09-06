@@ -1,5 +1,6 @@
 body{
     font-family: Helvetica;
+
 }
 
 .answerbox {
@@ -9,20 +10,37 @@ body{
 }
 
 .categories-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: left;
-    align-items: center;  
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px;
+    grid-template-rows: 75px;
+    grid-gap: 20px;
 }
 
 .catheading {
-    padding: 10px 25px 10px 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .squares-container {
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px 100px;
+    grid-template-columns: repeat(6, 100px);
+    grid-template-rows: 100px 100px 100px 100px 100px;
     grid-gap: 20px;
+}
+
+.answerbox {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.scorebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
