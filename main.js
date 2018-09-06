@@ -2,7 +2,7 @@
 //select the 'messagebar' element and change the text to a stored variable that contains a string
 $(() => {
 
-//MAIN QUESTION ARRAY
+    //MAIN QUESTION ARRAY
     let selectedAnswer = '' // holds the value of the number clicked
     const allAnswers = [
         //Category 1
@@ -19,15 +19,24 @@ $(() => {
         { id: 'cat3-3', points: 1000, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' }
     ]
 
-//PLAYER SCORES
+    //PLAYER SCORES
     let playerOneTotal = 0
     let playerTwoTotal = 0
 
-    let boxLocation
+    //PLAYER TURN TRACKER
 
-    let turnTracker = ['Player One','Player Two']
+    let squaresAnswered = 0
+    let turnTracker = ['Player One', 'Player Two']
+    let currentPlayer
 
-//RETRIEVE QUESTION USER SELECTED | Find the question in the array based on user click
+    const turnChanger = () => {
+        if(squaresAnswered % 2 === 0){
+            currentPlayer = turnTracker[1]
+        } else {currentPlayer = turnTracker[0]}
+    }
+    turnChanger()
+
+    //Retrieves data from Array from User Click Information
     let questionDisplay = ''
     let correctAnswer = ''
     let incorrectAnswer1 = ''
@@ -48,7 +57,7 @@ $(() => {
         messageBar()
     }
 
-//QUESTION FORMULA | Creates the question by putting the elements together
+    //Generates Question
     let createQuestion = () => {
         let input = `
         <p>${questionDisplay}</p>
@@ -61,73 +70,72 @@ $(() => {
         currentQuestion = input
     }
 
-//MESSAGE BAR MANAGER | Changes the messageBar
+    //MESSAGE BAR MANAGER | Changes the messageBar
     let currentQuestion
     let userClick = false;
     const messageBar = () => {
-        if (userClick === true) { 
+        if (userClick === true) {
             createQuestion()
             $('.messagebar p').html(currentQuestion)
-        }
+        } 
     }
     messageBar()
 
-//RESPONSE CHECKER | Finds a match between user answer and correct answer
+    //Answer Checker
     let userResponseChoice
     let responseCorrectness
     const checkResponse = () => {
         let correctAnswer = allAnswers[matchIndex].answer
-        if(userResponseChoice == correctAnswer){
+        if (userResponseChoice == correctAnswer) {
             correctUserResponse()
             console.log('match')
         } else {
-            responseCorrectness = 
-            incorrectUserResponse()
+            responseCorrectness =
+                incorrectUserResponse()
             console.log('no match')
-         }
         }
-    
-    //------Case for User Selecting Incorrect Response
-    let squaresAnswered = 0
+    }
+
+    //If Correct Response
     const correctUserResponse = () => {
         $('.messagebar p').text('Correct!')
         playerOneTotal += allAnswers[matchIndex].points
         squaresAnswered++
         updateDisplay()
         isGameOver()
-        console.log('playerOneTotal',playerOneTotal)
-        console.log('playerTwoTotal',playerTwoTotal)
-        console.log('squaresAnswered',squaresAnswered)
+        console.log('playerOneTotal', playerOneTotal)
+        console.log('playerTwoTotal', playerTwoTotal)
+        console.log('squaresAnswered', squaresAnswered)
     }
 
-    //------Case for User Selecting Correct Response
+    //If Incorrect Response
     const incorrectUserResponse = () => {
         $('.messagebar p').text(`Your answer was incorrect!`)
         squaresAnswered++
     }
 
-    //SCORE DISPLAY AND CHECK FOR GAME OVER | Shows the current score of each player
+    //Update Score Display on Page
     let updateDisplay = () => {
         $('#playerOneTotalDisplay').html(playerOneTotal)
         $('#playerTwoTotalDisplay').html(playerTwoTotal)
-    }    
+    }
 
+    //Determine if Game is Over
     const isGameOver = () => {
-        if(squaresAnswered === 9){
-            if(playerOneTotal > playerTwoTotal){
+        if (squaresAnswered === 9) {
+            if (playerOneTotal > playerTwoTotal) {
                 alert('playerOne wins!')
-            } else { 
+            } else {
                 alert('playertwo wins!')
-            }    
+            }
         }
     }
 
-
-//CLICK EVENTS!
+    //CLICK EVENTS!
 
     //Click A Square
     $('.answerbox').on('click', function ($event) {
-        $(event.target).css('background-color','gray').text('')
+        $(event.target).css('background-color', 'gray').text('')
         selectedAnswer = $event.target.id
         userClick = true
         findQuestion()
