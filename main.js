@@ -156,18 +156,26 @@ $(() => {
             if (playerOneTotal > playerTwoTotal) {
                 $('.messagebar p').html(`
                 <p>Player One Wins!</p>
-                <p id='playAgain'>Click to play again.</p>`)
+                <p id='playAgain'>Click here to play again.</p>`)
             } else {
                 $('.messagebar p').html(`
                 <p>Player One Wins!</p>
-                <p id='playAgain'>Click to play again.</p>`)
+                <p id='playAgain'>Click here to play again.</p>`)
             }
-        } //else keep playing!
+        } 
     }
 
-
+    //untested!!!!
     const gameReset = () => {
-        
+        console.log('click retrieved!')
+        //change each players score back to zero
+        const resetScore = () => {
+            playerOneTotal = 0
+            playerTwoTotal = 0
+            updateDisplay()
+        }
+        resetScore()
+        //change the squares back to available
 
     }
 
@@ -188,5 +196,9 @@ $(() => {
         checkResponse()
     })
 
+    //Click to restart game
+    $('.messagebar p').on('click', '.playAgain', function ($event) {
+        console.log(' I know you\'re trying to click this!')
+    })
 
 })
