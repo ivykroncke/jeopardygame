@@ -195,7 +195,7 @@ $(() => {
 
         //Click A Square
         $('.answerbox').on('click', function ($event) {
-            $(event.target).css('background-color', 'gray').text('')
+            $(event.target).css('background-color', 'gray').css('pointer-events','none').text('')
             selectedAnswer = $event.target.id
             userClick = true
             findQuestion()
