@@ -27,14 +27,13 @@ $(() => {
 
     let squaresAnswered = 0
     let turnTracker = ['Player One', 'Player Two']
-    let currentPlayer
+    let currentPlayer = turnTracker[0]
 
     const turnChanger = () => {
         if(squaresAnswered % 2 === 0){
             currentPlayer = turnTracker[1]
         } else {currentPlayer = turnTracker[0]}
     }
-    turnChanger()
 
     //Retrieves data from Array from User Click Information
     let questionDisplay = ''
@@ -60,6 +59,7 @@ $(() => {
     //Generates Question
     let createQuestion = () => {
         let input = `
+        <p>${currentPlayer}:</p>
         <p>${questionDisplay}</p>
         <div>
             <p class='answerChoice'>${correctAnswer}</p>
@@ -77,7 +77,7 @@ $(() => {
         if (userClick === true) {
             createQuestion()
             $('.messagebar p').html(currentQuestion)
-        } 
+        }
     }
     messageBar()
 
@@ -92,25 +92,28 @@ $(() => {
         } else {
             responseCorrectness =
                 incorrectUserResponse()
-            console.log('no match')
         }
     }
 
     //If Correct Response
     const correctUserResponse = () => {
-        $('.messagebar p').text('Correct!')
-        playerOneTotal += allAnswers[matchIndex].points
+        console.log(currentPlayer)
+        const addPoints = () => {
+            if(currentPlayer === turnTracker[0]){
+            playerOneTotal += allAnswers[matchIndex].points}
+        else {playerTwoTotal += allAnswers[matchIndex].points}}
+        addPoints()
+        turnChanger() //this was the first line in the function
+        $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`) //this was the second line int he function
         squaresAnswered++
         updateDisplay()
         isGameOver()
-        console.log('playerOneTotal', playerOneTotal)
-        console.log('playerTwoTotal', playerTwoTotal)
-        console.log('squaresAnswered', squaresAnswered)
     }
 
     //If Incorrect Response
     const incorrectUserResponse = () => {
-        $('.messagebar p').text(`Your answer was incorrect!`)
+        turnChanger()
+        $('.messagebar p').text(`Incorrect! ${currentPlayer}, select an answer to continue.`)
         squaresAnswered++
     }
 
