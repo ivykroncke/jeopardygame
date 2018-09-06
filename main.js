@@ -81,27 +81,21 @@ $(() => {
 
     //Generates Question
     let createQuestion = () => {
-        // add answers to array
-        console.log('hey!')
-        // let questionArray = [`${correctAnswer}`,`${incorrectAnswer1}`,`${incorrectAnswer2}`,`${incorrectAnswer3}`]
-        // // create loop
-        // var randomAnswer = questionArray[Math.floor(Math.random())];
+        // let questionArray = [`${correctAnswer}`, `${incorrectAnswer1}`, `${incorrectAnswer2}`, `${incorrectAnswer3}`]
+        // // for (let i = 0; i < questionArray.length; i++) {
+        //     var randomAnswer = questionArray[Math.floor(Math.random())]
+        //     console.log(typeof randomAnswer)
+        //     randomAnswer += '<p class=\'answerChoice\'></p>'
+        //     console.log(randomAnswer)
 
-        // var testArray = ['1','2','3','4']
+            // // add sugar to item (html, p tags, classes, etc)
+            // // append to input string
+            // // end loop
+            // }
 
-        // var testVar = testArray[ (Math.floor (Math.random() ) ) ]
-        // console.log(testVar)
+            // finish/print input string
 
-        // for(let i = 0; i < questionArray.length; i++){
-        // // randomly select item
-        // // add sugar to item (html, p tags, classes, etc)
-        // // append to input string
-        // // end loop
-        // }
-
-        // finish/print input string
-
-        let input = `
+            let input = `
         <p>${currentPlayer}:</p>
         <p>${questionDisplay}</p>
         <div>
@@ -110,113 +104,113 @@ $(() => {
             <p class='answerChoice'>${incorrectAnswer2}</p>
             <p class='answerChoice'>${incorrectAnswer3}</p> 
         </div>`
-        //loop and randomization to help w this
-        //splice
-        currentQuestion = input
-    }
-
-    //MESSAGE BAR MANAGER | Changes the messageBar
-    let currentQuestion
-    let userClick = false;
-    const messageBar = () => {
-        if (userClick === true) {
-            createQuestion()
-            $('.messagebar p').html(currentQuestion)
+            //loop and randomization to help w this
+            //splice
+            currentQuestion = input
         }
-    }
 
-    //Answer Checker
-    let userResponseChoice
-    const checkResponse = () => {
-        let correctAnswer = allAnswers[matchIndex].answer
-        if (userResponseChoice == correctAnswer) {
-            correctUserResponse()
-        } else {
-            incorrectUserResponse()
-        }
-    }
-
-    //If Correct Response
-    const correctUserResponse = () => {
-        //only deal with points in the correctUserResponse function
-        const addPoints = () => {
-            //adds points to the player whose turn it is
-            if (currentPlayer === turnTracker[0]) {
-                playerOneTotal += allAnswers[matchIndex].points
-            }
-            else {
-                playerTwoTotal += allAnswers[matchIndex].points
+        //MESSAGE BAR MANAGER | Changes the messageBar
+        let currentQuestion
+        let userClick = false;
+        const messageBar = () => {
+            if (userClick === true) {
+                createQuestion()
+                $('.messagebar p').html(currentQuestion)
             }
         }
-        addPoints()
-        turnChanger()
-        $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`)
-        updateDisplay() //only needed in correct
-        isGameOver()
-    }
 
-    //If Incorrect Response
-    const incorrectUserResponse = () => {
-        turnChanger()
-        $('.messagebar p').text(`Incorrect! ${currentPlayer}, select an answer to continue.`)
-        isGameOver()
-    }
-
-    //Update Score Display on Page
-    let updateDisplay = () => {
-        $('#playerOneTotalDisplay').html(playerOneTotal)
-        $('#playerTwoTotalDisplay').html(playerTwoTotal)
-    }
-
-    //Determine if Game is Over
-    const isGameOver = () => {
-        squaresAnswered++
-        if (squaresAnswered === 3) {
-            if (playerOneTotal > playerTwoTotal) {
-                $('.messagebar p').html(`
-                <p>Player One Wins!</p>
-                <p id='playAgain'>Click here to play again.</p>`)
+        //Answer Checker
+        let userResponseChoice
+        const checkResponse = () => {
+            let correctAnswer = allAnswers[matchIndex].answer
+            if (userResponseChoice == correctAnswer) {
+                correctUserResponse()
             } else {
-                $('.messagebar p').html(`
+                incorrectUserResponse()
+            }
+        }
+
+        //If Correct Response
+        const correctUserResponse = () => {
+            //only deal with points in the correctUserResponse function
+            const addPoints = () => {
+                //adds points to the player whose turn it is
+                if (currentPlayer === turnTracker[0]) {
+                    playerOneTotal += allAnswers[matchIndex].points
+                }
+                else {
+                    playerTwoTotal += allAnswers[matchIndex].points
+                }
+            }
+            addPoints()
+            turnChanger()
+            $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`)
+            updateDisplay() //only needed in correct
+            isGameOver()
+        }
+
+        //If Incorrect Response
+        const incorrectUserResponse = () => {
+            turnChanger()
+            $('.messagebar p').text(`Incorrect! ${currentPlayer}, select an answer to continue.`)
+            isGameOver()
+        }
+
+        //Update Score Display on Page
+        let updateDisplay = () => {
+            $('#playerOneTotalDisplay').html(playerOneTotal)
+            $('#playerTwoTotalDisplay').html(playerTwoTotal)
+        }
+
+        //Determine if Game is Over
+        const isGameOver = () => {
+            squaresAnswered++
+            if (squaresAnswered === 3) {
+                if (playerOneTotal > playerTwoTotal) {
+                    $('.messagebar p').html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
+                } else {
+                    $('.messagebar p').html(`
+                <p>Player One Wins!</p>
+                <p id='playAgain'>Click here to play again.</p>`)
+                }
             }
-        } 
-    }
-
-    //untested!!!!
-    const gameReset = () => {
-        //change each players score back to zero
-        const resetScore = () => {
-            playerOneTotal = 0
-            playerTwoTotal = 0
-            updateDisplay()
         }
-        resetScore()
-        //change the squares back to available
 
-    }
+        //untested!!!!
+        const gameReset = () => {
+            //change each players score back to zero
+            const resetScore = () => {
+                playerOneTotal = 0
+                playerTwoTotal = 0
+                updateDisplay()
+            }
+            resetScore()
+            //change the squares back to available
 
-    //CLICK EVENTS!
+        }
 
-    //Click A Square
-    $('.answerbox').on('click', function ($event) {
-        $(event.target).css('background-color', 'gray').text('')
-        selectedAnswer = $event.target.id
-        userClick = true
-        findQuestion()
-        messageBar()
+        //CLICK EVENTS!
+
+        //Click A Square
+        $('.answerbox').on('click', function ($event) {
+            $(event.target).css('background-color', 'gray').text('')
+            selectedAnswer = $event.target.id
+            userClick = true
+            findQuestion()
+            messageBar()
+        })
+
+        //Click an Answer
+        $('.messagebar p').on('click', '.answerChoice', function ($event) {
+            userResponseChoice = ($event.target).innerHTML;
+            checkResponse()
+        })
+
+        //Click to restart game
+        $('.messagebar p').on('click', '.playAgain', function ($event) {
+            console.log(' I know you\'re trying to click this!')
+        })
+
     })
-
-    //Click an Answer
-    $('.messagebar p').on('click', '.answerChoice', function ($event) {
-        userResponseChoice = ($event.target).innerHTML;
-        checkResponse()
-    })
-
-    //Click to restart game
-    $('.messagebar p').on('click', '.playAgain', function ($event) {
-        console.log(' I know you\'re trying to click this!')
-    })
-
-})
