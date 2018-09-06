@@ -162,13 +162,14 @@ $(() => {
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click to play again.</p>`)
             }
-        } //if squaresAnswered < 25, no action
+        } //else keep playing!
     }
 
 
-    // const gameReset = () => {
+    const gameReset = () => {
+        
 
-    // }
+    }
 
     //CLICK EVENTS!
 
