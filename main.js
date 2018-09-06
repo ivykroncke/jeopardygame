@@ -2,27 +2,32 @@
 //select the 'messagebar' element and change the text to a stored variable that contains a string
 $(() => {
 
+//MAIN QUESTION ARRAY
     let selectedAnswer = '' // holds the value of the number clicked
     const allAnswers = [
         //Category 1
-        { id: 'cat1-1', points: '$500', question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat2-1', points: '$500', question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat3-1', points: '$500', question: 'Answer: All dogs go to this place', answer: 'what is heaven?', 'incorrectAnswer1': 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat1-1', points: 500, question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat2-1', points: 500, question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat3-1', points: 500, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', 'incorrectAnswer1': 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
         //Category 2
-        { id: 'cat1-2', points: '$750', question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat2-2', points: '$750', question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat3-2', points: '$750', question: 'Answer: All dogs go to this place', answer: 'what is heaven?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat1-2', points: 750, question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat2-2', points: 750, question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat3-2', points: 750, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
         //Category 3
-        { id: 'cat1-3', points: '$1000', question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat2-3', points: '$1000', question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
-        { id: 'cat3-3', points: '$1000', question: 'Answer: All dogs go to this place', answer: 'what is heaven?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' }
+        { id: 'cat1-3', points: 1000, question: 'Answer: This cat loves lasagna', answer: 'who is garfield?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat2-3', points: 1000, question: 'Answer: This dog saves little boys out of wells', answer: 'who is lassie?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' },
+        { id: 'cat3-3', points: 1000, question: 'Answer: All dogs go to this place', answer: 'what is heaven?', incorrectAnswer1: 'wrong', incorrectAnswer2: 'wrong', incorrectAnswer3: 'wrong' }
     ]
 
-    //Hold Running Player Totals
+//PLAYER SCORES
     let playerOneTotal = 0
-    let PlayerTwoTotal = 0
+    let playerTwoTotal = 0
 
-    //Find the question in the array based on user click
+    let boxLocation
+
+    let turnTracker = ['Player One','Player Two']
+
+//RETRIEVE QUESTION USER SELECTED | Find the question in the array based on user click
     let questionDisplay = ''
     let correctAnswer = ''
     let incorrectAnswer1 = ''
@@ -43,7 +48,7 @@ $(() => {
         messageBar()
     }
 
-    //Creates the question by putting the elements together
+//QUESTION FORMULA | Creates the question by putting the elements together
     let createQuestion = () => {
         let input = `
         <p>${questionDisplay}</p>
@@ -56,19 +61,18 @@ $(() => {
         currentQuestion = input
     }
 
-//CHANGE THE MESSAGE BAR
+//MESSAGE BAR MANAGER | Changes the messageBar
     let currentQuestion
     let userClick = false;
     const messageBar = () => {
-        if (userClick === true) {
+        if (userClick === true) { 
             createQuestion()
             $('.messagebar p').html(currentQuestion)
         }
     }
     messageBar()
 
-//EVALUATE - Response Right or Wrong?
-    //userResponseChoice, responseCorrectness store the last user response and whether it is correct   
+//RESPONSE CHECKER | Finds a match between user answer and correct answer
     let userResponseChoice
     let responseCorrectness
     const checkResponse = () => {
@@ -82,42 +86,60 @@ $(() => {
             console.log('no match')
          }
         }
-
-    //Case for User Selecting Incorrect Response
+    
+    //------Case for User Selecting Incorrect Response
+    let squaresAnswered = 0
     const correctUserResponse = () => {
         $('.messagebar p').text('Correct!')
-            // Add amount for question to current player
-            //start the squareAnswered function for the question's corresponding square
+        playerOneTotal += allAnswers[matchIndex].points
+        squaresAnswered++
+        updateDisplay()
+        isGameOver()
+        console.log('playerOneTotal',playerOneTotal)
+        console.log('playerTwoTotal',playerTwoTotal)
+        console.log('squaresAnswered',squaresAnswered)
     }
 
-    //Case for User Selecting Correct Response
+    //------Case for User Selecting Correct Response
     const incorrectUserResponse = () => {
-        $('.messagebar p').text('Your answer was incorrect!')
-            // !Current Player turn
-            //start the squareAnswered function for the question's corresponding square
+        $('.messagebar p').text(`Your answer was incorrect!`)
+        squaresAnswered++
     }
 
-    //Converts square to Blank/Unavailable
-    const squareAnswered = () => {
-        //if the square has been answered, change the state of the square
+    //SCORE DISPLAY AND CHECK FOR GAME OVER | Shows the current score of each player
+    let updateDisplay = () => {
+        $('#playerOneTotalDisplay').html(playerOneTotal)
+        $('#playerTwoTotalDisplay').html(playerTwoTotal)
+    }    
+
+    const isGameOver = () => {
+        if(squaresAnswered === 9){
+            if(playerOneTotal > playerTwoTotal){
+                alert('playerOne wins!')
+            } else { 
+                alert('playertwo wins!')
+            }    
+        }
     }
 
-    //CLICK EVENTS!
 
-    //click event - calls the messageBar function
+//CLICK EVENTS!
+
+    //Click A Square
     $('.answerbox').on('click', function ($event) {
+        $(event.target).css('background-color','gray').text('')
         selectedAnswer = $event.target.id
-        userClick = true //switches the status to unlock functions
+        userClick = true
         findQuestion()
-        messageBar() 
+        messageBar()
     })
 
-
+    //Click an Answer
     $('.messagebar p').on('click', '.answerChoice', function ($event) {
         userResponseChoice = ($event.target).innerHTML;
         checkResponse()
     })
 
 
-    // DO NOT DELETE THESE BELOW!
+
 })
