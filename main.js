@@ -60,11 +60,7 @@ $(() => {
     }
 
     //Retrieves data from Array from User Click Information
-    let questionDisplay = ''
-    let correctAnswer = ''
-    let incorrectAnswer1 = ''
-    let incorrectAnswer2 = ''
-    let incorrectAnswer3 = ''
+    let allInfo = {}
     let matchIndex
     const findQuestion = () => {
         for (let i = 0; i < allAnswers.length; i++) {
@@ -72,41 +68,27 @@ $(() => {
                 matchIndex = [i]
             }
         }
-        questionDisplay = allAnswers[matchIndex].question
-        correctAnswer = allAnswers[matchIndex].answer
-        incorrectAnswer1 = allAnswers[matchIndex].incorrectAnswer1
-        incorrectAnswer2 = allAnswers[matchIndex].incorrectAnswer2
-        incorrectAnswer3 = allAnswers[matchIndex].incorrectAnswer3
+        allInfo = allAnswers[matchIndex]
     }
 
     //Generates Question
     let createQuestion = () => {
-        // let questionArray = [`${correctAnswer}`, `${incorrectAnswer1}`, `${incorrectAnswer2}`, `${incorrectAnswer3}`]
-        // // for (let i = 0; i < questionArray.length; i++) {
-        //     var randomAnswer = questionArray[Math.floor(Math.random())]
-        //     console.log(typeof randomAnswer)
-        //     randomAnswer += '<p class=\'answerChoice\'></p>'
-        //     console.log(randomAnswer)
+        let questionArray = [allInfo.answer, allInfo.incorrectAnswer1, allInfo.incorrectAnswer2, allInfo.incorrectAnswer3]
+        questionArray.sort((a, b) => {
+            return (Math.random() * 2) - 1
+        })
 
-        // // add sugar to item (html, p tags, classes, etc)
-        // // append to input string
-        // // end loop
-        // }
-
-        // finish/print input string
-
-        let input = `
+        let answerHtml = `
         <p>${currentPlayer}:</p>
-        <p>${questionDisplay}</p>
-        <div>
-            <p class='answerChoice'>${correctAnswer}</p>
-            <p class='answerChoice'>${incorrectAnswer1}</p>
-            <p class='answerChoice'>${incorrectAnswer2}</p>
-            <p class='answerChoice'>${incorrectAnswer3}</p> 
-        </div>`
-        //loop and randomization to help w this
-        //splice
-        currentQuestion = input
+        <p>${allInfo.question}</p>
+        <div>`
+
+        for (let i = 0; i < questionArray.length; i++) {
+            answerHtml += `<p class='answerChoice'>${questionArray[i]}</p>`
+        }
+        answerHtml += `</div>`
+
+        currentQuestion = answerHtml
     }
 
     //MESSAGE BAR MANAGER | Changes the messageBar
@@ -165,7 +147,7 @@ $(() => {
     //Determine if Game is Over
     const isGameOver = () => {
         squaresAnswered++
-        if (playerOneTotal > 5000) {
+        if (playerOneTotal > 500) {
             $('.messagebar p').html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
@@ -191,37 +173,40 @@ $(() => {
 
     //untested!!!!
     const gameReset = () => {
-    //change each players score back to zero
-    const resetScore = () => {
-        playerOneTotal = 0
-        playerTwoTotal = 0
-        updateDisplay()
+        //change each players score back to zero
+        const resetScore = () => {
+            playerOneTotal = 0
+            playerTwoTotal = 0
+            updateDisplay()
+        }
+        resetScore()
+        //change the squares back to available
+
     }
-    resetScore()
-    //change the squares back to available
 
-}
+    //CLICK EVENTS!
 
-//CLICK EVENTS!
+    //Click A Square
+    $('.answerbox').on('click', function ($event) {
+        $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('')
+        selectedAnswer = $event.target.id
+        userClick = true
+        findQuestion()
+        messageBar()
+    })
 
-//Click A Square
-$('.answerbox').on('click', function ($event) {
-    $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('')
-    selectedAnswer = $event.target.id
-    userClick = true
-    findQuestion()
-    messageBar()
-})
+    //Click an Answer
+    $('.messagebar p').on('click', '.answerChoice', function ($event) {
+        userResponseChoice = ($event.target).innerHTML;
+        checkResponse()
+    })
 
-//Click an Answer
-$('.messagebar p').on('click', '.answerChoice', function ($event) {
-    userResponseChoice = ($event.target).innerHTML;
-    checkResponse()
-})
+    //Click to restart game
+    $('.messagebar p').on('click', '.playAgain', function ($event) {
+        console.log(' I know you\'re trying to click this!')
+    })
 
-//Click to restart game
-$('.messagebar p').on('click', '.playAgain', function ($event) {
-    console.log(' I know you\'re trying to click this!')
-})
+
+
 
 })
