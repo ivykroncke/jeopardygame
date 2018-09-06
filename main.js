@@ -77,11 +77,30 @@ $(() => {
         incorrectAnswer1 = allAnswers[matchIndex].incorrectAnswer1
         incorrectAnswer2 = allAnswers[matchIndex].incorrectAnswer2
         incorrectAnswer3 = allAnswers[matchIndex].incorrectAnswer3
-        messageBar()
     }
 
     //Generates Question
     let createQuestion = () => {
+        // add answers to array
+        console.log('hey!')
+        // let questionArray = [`${correctAnswer}`,`${incorrectAnswer1}`,`${incorrectAnswer2}`,`${incorrectAnswer3}`]
+        // // create loop
+        // var randomAnswer = questionArray[Math.floor(Math.random())];
+
+        // var testArray = ['1','2','3','4']
+
+        // var testVar = testArray[ (Math.floor (Math.random() ) ) ]
+        // console.log(testVar)
+
+        // for(let i = 0; i < questionArray.length; i++){
+        // // randomly select item
+        // // add sugar to item (html, p tags, classes, etc)
+        // // append to input string
+        // // end loop
+        // }
+
+        // finish/print input string
+
         let input = `
         <p>${currentPlayer}:</p>
         <p>${questionDisplay}</p>
@@ -89,8 +108,10 @@ $(() => {
             <p class='answerChoice'>${correctAnswer}</p>
             <p class='answerChoice'>${incorrectAnswer1}</p>
             <p class='answerChoice'>${incorrectAnswer2}</p>
-            <p class='answerChoice'>${incorrectAnswer3}</p>
+            <p class='answerChoice'>${incorrectAnswer3}</p> 
         </div>`
+        //loop and randomization to help w this
+        //splice
         currentQuestion = input
     }
 
@@ -103,7 +124,6 @@ $(() => {
             $('.messagebar p').html(currentQuestion)
         }
     }
-    messageBar()
 
     //Answer Checker
     let userResponseChoice
@@ -151,7 +171,6 @@ $(() => {
     //Determine if Game is Over
     const isGameOver = () => {
         squaresAnswered++
-        console.log(squaresAnswered)
         if (squaresAnswered === 3) {
             if (playerOneTotal > playerTwoTotal) {
                 $('.messagebar p').html(`
@@ -167,7 +186,6 @@ $(() => {
 
     //untested!!!!
     const gameReset = () => {
-        console.log('click retrieved!')
         //change each players score back to zero
         const resetScore = () => {
             playerOneTotal = 0
