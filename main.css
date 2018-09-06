@@ -1,28 +1,29 @@
-body{
+body {
+    height: 100%;
+    margin: 0;
     font-family: Helvetica;
+    background-color: peachpuff;
+
+}
+
+#sitewrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: space-around;
 }
 
 h1 {
     text-align: center;
+    font-family: 'Montserrat';
+    text-transform: uppercase;
 }
 
 .messagebar {
     text-align: center;
-}
-
-.answerbox {
-    border: gray 1px solid;
-    height: 100px;
-    width: 100px;
-}
-
-/* may need to add these to the grid later  */
-.categories-container {
-    margin: 0px 10% 0px 10%;
-    display: grid;
-    grid-template-columns: repeat(5, 2fr);
-    grid-template-rows: 75px;
-    grid-gap: 20px;
+    background-color: gray;
+    color: white;
+    margin-bottom: 30px;
 }
 
 .catheading {
@@ -32,16 +33,18 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-
 .squares-container {
     margin: 0px 10% 0px 10%;
     display: grid;
     grid-template-columns: repeat(5, 2fr);
-    grid-template-rows: repeat(5, 2fr);
+    grid-template-rows: 100px;
+    grid-auto-rows: minmax(75px, auto);
     grid-gap: 20px;
 }
 
 .answerbox {
+    border: gray 1px solid;
+    font-size: 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -49,17 +52,17 @@ h1 {
     align-items: center;
 }
 
-.space {
-    background-color: white;
+div.space {
+    background-color: peachpuff;
     height: 50px;
 }
 
 /* get a sticky footer */
 .scorebar {
-    background-color: black;
+    background-color: gray;
     color: white;
-    margin: 0 auto;
+    padding: 20px 100px 20px 100px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
