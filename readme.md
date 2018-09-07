@@ -1,6 +1,6 @@
 # Doggie Jeopardy
 
-This game is a playful take on Jeopardy, quizzing players with dog trivia and entertaining them with frivolous dog noises.
+This game is a playful take on Jeopardy, quizzing players with dog trivia and entertaining them with frivolous dog noises. 
 
 Live site: (href)
 
@@ -25,4 +25,5 @@ A step by step series of examples that tell you how to get a development env run
 ## Future Development
 
 * Add more graphics, animations, and transitions for better UI.
+* A way to reset the game without hitting refresh.
 * Add a second round or a creative alternative to a write-in Final Jeopardy.

@@ -1,7 +1,7 @@
 //onLoad, prompt player 1 is prompted to select a tile via HTML text.
-//select the 'messagebar' element and change the text to a stored variable that contains a string
 $(() => {
-  //MAIN QUESTION ARRAY
+  //Start Main Question/Answer Array
+
   let selectedAnswer = ""; // holds the value of the number clicked
   const allAnswers = [
     //$400 Questions
@@ -158,7 +158,7 @@ $(() => {
       incorrectAnswer3: "What is Max?"
     },
 
-    //$1,800 Questions
+    //$1,600 Questions
     {
       id: "cat1-4",
       points: 1600,
@@ -194,7 +194,7 @@ $(() => {
         "Moose, the celebrity Jack Russell Terrier most famous for his role as Eddie on the television sitcom Frasier, earned an average of this many dollars per episode.",
       answer: "What is $10,000?",
       incorrectAnswer1: "What is $15,000?",
-      incorrectAnswer2: "What is $10,000?",
+      incorrectAnswer2: "What is $20,000?",
       incorrectAnswer3: "What is $5,000?"
     },
     {
@@ -258,11 +258,11 @@ $(() => {
     }
   ];
 
-  //PLAYER SCORES
+  //Player Scores
   let playerOneTotal = 0;
   let playerTwoTotal = 0;
 
-  //PLAYER TURN MANAGER
+  //Player Turn Manager
   let squaresAnswered = 0;
   let turnTracker = ["Player One", "Player Two"];
   let currentPlayer = turnTracker[0];
@@ -330,9 +330,6 @@ $(() => {
     }
   };
 
-  //Correct Answer Sound Effect
-  //   const mediumWoof = new Audio("./sounds/mediumwoof.wav");
-
   //If Correct Response
   let whichWoof;
   const correctUserResponse = () => {
@@ -383,22 +380,28 @@ $(() => {
     }
   };
 
-  const manyWoofs = new Audio("./sounds/manywoofs.wav");
   //Determine if Game is Over
+  const manyWoofs = new Audio("./sounds/manywoofs.wav");
   const isGameOver = () => {
     squaresAnswered++;
-    if (playerOneTotal > 5000) {
+
+    //Player One Wins By Reaching Max Dollar Amount
+    if (playerOneTotal > 12000) {
       manyWoofs.play();
       $(".messagebar p").html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`);
       $(".answerbox").css("pointer-events", "none");
-    } else if (playerTwoTotal > 5000) {
+
+      //Player Two Wins By Reaching Max Dollar Amount
+    } else if (playerTwoTotal > 12000) {
       manyWoofs.play();
       $(".messagebar p").html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`);
       $(".answerbox").css("pointer-events", "none");
+
+      //Edge Case: Neither Player Reach Dollar Amount After Answering All Questions
     } else {
       if (squaresAnswered === 25 && playerOneTotal > playerTwoTotal) {
         manyWoofs.play();
@@ -412,13 +415,12 @@ $(() => {
                 <p id='playAgain'>Click here to play again.</p>`);
       }
     }
+    //If No Winners, Play A Reaction Sound for Winning/Losing Answer
     reactionSound();
   };
 
-  //Click A Square Sound Effect
-  const highwoof = new Audio("./sounds/highwoof.wav");
-
   //Click A Square Event
+  const highwoof = new Audio("./sounds/highwoof.wav");
   $(".answerbox").on("click", function($event) {
     $(event.target)
       .css("background-color", "gray")
