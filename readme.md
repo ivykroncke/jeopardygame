@@ -22,4 +22,7 @@ Live site: (href)
 
 A step by step series of examples that tell you how to get a development env running
 
+## Future Development
 
+* Add more graphics, animations, and transitions for better UI.
+* Add a second round or a creative alternative to a write-in Final Jeopardy.
