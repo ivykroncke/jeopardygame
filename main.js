@@ -195,7 +195,7 @@ $(() => {
 
     //Click A Square
     $('.answerbox').on('click', function ($event) {
-        $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('')
+        $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('').slideDown()
         selectedAnswer = $event.target.id
         highwoof.play()
         userClick = true
