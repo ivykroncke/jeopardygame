@@ -206,7 +206,7 @@ $(() => {
     $('.answerbox').on('click', function ($event) {
         $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('').slideDown()
         selectedAnswer = $event.target.id
-        highwoof.play('delay', 2 sec)
+        highwoof.play()
         userClick = true
         findQuestion()
         messageBar()
