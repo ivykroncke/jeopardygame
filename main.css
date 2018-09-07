@@ -27,6 +27,7 @@ h1 {
 
 .catheading {
     text-align: center;
+    font-size: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
