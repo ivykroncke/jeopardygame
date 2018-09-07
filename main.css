@@ -1,8 +1,10 @@
 body {
     height: 100%;
     font-family: 'Open Sans';
-    background-color: mintcream;
+    /* background-color: mintcream; */
+    background: mintcream url('sketch-bg.png') repeat;
 }
+
 
 #sitewrapper {
     min-height: 100%;
@@ -25,7 +27,6 @@ img {
 @media screen and (max-width: 768px){
     img{
         padding: 0px 0px 0px 20px;
-
     }
  }
 
@@ -85,7 +86,6 @@ h1 {
 .cat {
     align-self: center;
 }
-
 
 
 .squares-container {

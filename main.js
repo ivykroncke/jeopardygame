@@ -44,13 +44,6 @@ $(() => {
 
     ]
 
-    // const highwoof = document.createElement("audio")
-    // highwoof.src = 'sounds/highwoof.wav'
-    // highwoof.volume = 0.1;
-    // highwoof.autoPlay = false;
-    // highwoof.preLoad = true;
-    // highwoof.controls = true;
-
     //PLAYER SCORES
     let playerOneTotal = 0
     let playerTwoTotal = 0
@@ -119,6 +112,8 @@ $(() => {
         }
     }
 
+    const mediumWoof = new Audio("./sounds/mediumwoof.wav");
+
     //If Correct Response
     const correctUserResponse = () => {
         //only deal with points in the correctUserResponse function
@@ -135,13 +130,17 @@ $(() => {
         turnChanger()
         $('.messagebar p').text(`Correct! ${currentPlayer}, select an answer to continue.`)
         updateDisplay() //only needed in correct
+        mediumWoof.play()
         isGameOver()
     }
+
+    const whimper = new Audio("./sounds/whimper.wav");
 
     //If Incorrect Response
     const incorrectUserResponse = () => {
         turnChanger()
         $('.messagebar p').text(`Incorrect! ${currentPlayer}, select an answer to continue.`)
+        whimper.play()
         isGameOver()
     }
 
@@ -151,29 +150,36 @@ $(() => {
         $('#playerTwoTotalDisplay').html(playerTwoTotal)
     }
 
+    const manyWoofs = new Audio("./sounds/manywoofs.wav");
+
     //Determine if Game is Over
     const isGameOver = () => {
         squaresAnswered++
-        if (playerOneTotal > 500) {
+        if (playerOneTotal > 5000) {
             $('.messagebar p').html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
+            // manywoofs.play()
             $('.answerbox').css('pointer-events', 'none')
         } else if (playerTwoTotal > 5000) {
             $('.messagebar p').html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
             $('.answerbox').css('pointer-events', 'none')
+            // manyWoofs.play()
         }
         else {
             if (squaresAnswered === 25 && playerOneTotal > playerTwoTotal) {
                 $('.messagebar p').html(`
                 <p>Player One Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
+                // manyWoofs.play()
             } else if (squaresAnswered === 25 && playerTwoTotal > playerOneTotal)
                 $('.messagebar p').html(`
                 <p>Player Two Wins!</p>
                 <p id='playAgain'>Click here to play again.</p>`)
+                // manyWoofs.play()
+            
         }
     }
 
@@ -193,17 +199,18 @@ $(() => {
 
     //CLICK EVENTS!
 
+    const highwoof = new Audio("./sounds/highwoof.wav");
+    // const woofDelay = highWoof.createDelay(2.0)
+
     //Click A Square
     $('.answerbox').on('click', function ($event) {
         $(event.target).css('background-color', 'gray').css('pointer-events', 'none').text('').slideDown()
         selectedAnswer = $event.target.id
-        highwoof.play()
+        highwoof.play('delay', 2 sec)
         userClick = true
         findQuestion()
         messageBar()
     })
-
-    const highwoof = new Audio("./sounds/highwoof.wav");
 
     //Click an Answer
     $('.messagebar p').on('click', '.answerChoice', function ($event) {
@@ -215,22 +222,5 @@ $(() => {
     $('.messagebar p').on('click', '.playAgain', function ($event) {
         // console.log(' I know you\'re trying to click this!')
     })
-
-
-    // $('#dice-button').click(e => rollSound.play());
-
-    // // const bark = () => {
-    //     var highwoof = document.createElement("audio");
-    //     highwoof.src = 'sounds/highwoof.wav'
-    //     highwoof.volume = 0.1;
-    //     highwoof.autoPlay = false;
-    //     highwoof.preLoad = true;
-    //     highwoof.controls = true;
-      
-    //     // $(".messagebar p").on('click', 'answerChoice', function() {
-    //     //   highwoof.play();
-    //       // obj.pause();
-    //     });
-    //   });
 
 })

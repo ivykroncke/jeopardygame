@@ -17,121 +17,123 @@
 
 <body>
 
-    <audio id='highwoof' preload='auto'>
-        <source src='/sounds/highwoof.wav'>
+    <!-- <audio id='highwoof' preload='auto'>
+        <source src='/sounds/highwoof.wav'> -->
     </audio>
+    <div id='cover'>
+        <div id='sitewrapper'>
 
-    <div id='sitewrapper'>
+            <header class="pulse animated delay-2s">
+                <img src='doggiesketch.jpg'>
 
-        <header class="pulse animated delay-2s">
-            <img src='doggiesketch.jpg'>
+                <h1>Doggie Jeopardy!</h1>
 
-            <h1>Doggie Jeopardy!</h1>
+            </header>
 
-        </header>
+            <!-- message bar: prompts turns and displays questions -->
+            <div class='messagebar'>
+                <p>Player One, select a Question to Begin.</p>
+            </div>
 
-        <!-- message bar: prompts turns and displays questions -->
-        <div class='messagebar'>
-            <p>Player One, select a Question to Begin.</p>
+            <!-- category row -->
+
+            <div class='squares-container'>
+
+                <div id='cat1' class='catheading'>
+                    <p class="cat">Dogs in History</p>
+                </div>
+                <div id='cat2' class='catheading'>
+                    <p class="cat">Vet School</p>
+                </div>
+                <div id='cat3' class='catheading'>
+                    <p class="cat">Breed All About It</p>
+                </div>
+                <div id='cat4' class='catheading'>
+                    <p class="cat">Famous Fidos</p>
+                </div>
+                <div id='cat5' class='catheading'>
+                    <p class="cat">Man's Best Friend</p>
+                </div>
+
+                <!-- $400 Questions  -->
+                <div id='cat1-1' class='answerbox'>$400
+                </div>
+                <div id='cat2-1' class='answerbox'>$400
+                </div>
+                <div id='cat3-1' class='answerbox'>$400
+                </div>
+                <div id='cat4-1' class='answerbox'>$400
+                </div>
+                <div id='cat5-1' class='answerbox'>$400
+                </div>
+
+                <!-- $800 Questions -->
+                <div id='cat1-2' class='answerbox'>$800
+                </div>
+                <div id='cat2-2' class='answerbox'>$800
+                </div>
+                <div id='cat3-2' class='answerbox'>$800
+                </div>
+                <div id='cat4-2' class='answerbox'>$800
+                </div>
+                <div id='cat5-2' class='answerbox'>$800
+                </div>
+
+                <!-- $1,200 Questions -->
+                <div id='cat1-3' class='answerbox'>$1,200
+                </div>
+                <div id='cat2-3' class='answerbox'>$1,200
+                </div>
+                <div id='cat3-3' class='answerbox'>$1,200
+                </div>
+                <div id='cat4-3' class='answerbox'>$1,200
+                </div>
+                <div id='cat5-3' class='answerbox'>$1,200
+
+                </div>
+
+                <!-- $1,800 Questions -->
+                <div id='cat1-4' class='answerbox'>$1,800
+                </div>
+                <div id='cat2-4' class='answerbox'>$1,800
+                </div>
+                <div id='cat3-4' class='answerbox'>$1,800
+                </div>
+                <div id='cat4-4' class='answerbox'>$1,800
+                </div>
+                <div id='cat5-4' class='answerbox'>$1,800
+
+                </div>
+
+                <!-- Column 5-->
+                <div id='cat1-5' class='answerbox'>$2,000
+                </div>
+                <div id='cat2-5' class='answerbox'>$2,000
+                </div>
+                <div id='cat3-5' class='answerbox'>$2,000
+                </div>
+                <div id='cat4-5' class='answerbox'>$2,000
+                </div>
+                <div id='cat5-5' class='answerbox'>$2,000
+
+                </div>
+
+            </div>
+
+            <div class='space'></div>
+
+            <!-- score bar: display player's running score -->
+            <div class='scorebar'>
+                <p>First Players' Score: $ <span id="playerOneTotalDisplay"></span></p>
+                <p>Second Player's Score: $ <span id="playerTwoTotalDisplay"></span></p>
+            </div>
+
         </div>
-
-        <!-- category row -->
-
-        <div class='squares-container'>
-
-            <div id='cat1' class='catheading'>
-                <p class="cat">Dogs in History</p>
-            </div>
-            <div id='cat2' class='catheading'>
-                <p class="cat">Vet School</p>
-            </div>
-            <div id='cat3' class='catheading'>
-                <p class="cat">Breed All About It</p>
-            </div>
-            <div id='cat4' class='catheading'>
-                <p class="cat">Famous Fidos</p>
-            </div>
-            <div id='cat5' class='catheading'>
-                <p class="cat">Man's Best Friend</p>
-            </div>
-
-            <!-- $400 Questions  -->
-            <div id='cat1-1' class='answerbox'>$400
-            </div>
-            <div id='cat2-1' class='answerbox'>$400
-            </div>
-            <div id='cat3-1' class='answerbox'>$400
-            </div>
-            <div id='cat4-1' class='answerbox'>$400
-            </div>
-            <div id='cat5-1' class='answerbox'>$400
-            </div>
-
-            <!-- $800 Questions -->
-            <div id='cat1-2' class='answerbox'>$800
-            </div>
-            <div id='cat2-2' class='answerbox'>$800
-            </div>
-            <div id='cat3-2' class='answerbox'>$800
-            </div>
-            <div id='cat4-2' class='answerbox'>$800
-            </div>
-            <div id='cat5-2' class='answerbox'>$800
-            </div>
-
-            <!-- $1,200 Questions -->
-            <div id='cat1-3' class='answerbox'>$1,200
-            </div>
-            <div id='cat2-3' class='answerbox'>$1,200
-            </div>
-            <div id='cat3-3' class='answerbox'>$1,200
-            </div>
-            <div id='cat4-3' class='answerbox'>$1,200
-            </div>
-            <div id='cat5-3' class='answerbox'>$1,200
-
-            </div>
-
-            <!-- $1,800 Questions -->
-            <div id='cat1-4' class='answerbox'>$1,800
-            </div>
-            <div id='cat2-4' class='answerbox'>$1,800
-            </div>
-            <div id='cat3-4' class='answerbox'>$1,800
-            </div>
-            <div id='cat4-4' class='answerbox'>$1,800
-            </div>
-            <div id='cat5-4' class='answerbox'>$1,800
-
-            </div>
-
-            <!-- Column 5-->
-            <div id='cat1-5' class='answerbox'>$2,000
-            </div>
-            <div id='cat2-5' class='answerbox'>$2,000
-            </div>
-            <div id='cat3-5' class='answerbox'>$2,000
-            </div>
-            <div id='cat4-5' class='answerbox'>$2,000
-            </div>
-            <div id='cat5-5' class='answerbox'>$2,000
-
-            </div>
-
-        </div>
-
-        <div class='space'></div>
-
-        <!-- score bar: display player's running score -->
-        <div class='scorebar'>
-            <p>First Players' Score: $ <span id="playerOneTotalDisplay"></span></p>
-            <p>Second Player's Score: $ <span id="playerTwoTotalDisplay"></span></p>
-        </div>
-
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
+
 
 </html>
