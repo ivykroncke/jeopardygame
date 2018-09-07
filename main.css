@@ -1,21 +1,23 @@
 body {
     height: 100%;
     font-family: 'Open Sans';
-    background: url('visual/sketch-bg.png');
+    background-image: url('visual/texture-bg.png');
+    background-color:  rgba(120, 206, 225, .3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space
 }
 
 /* Makes entire page a flex container */
-
 #sitewrapper {
     min-height: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space
 }
 
 /* Part of #sitewrapper flex container */
-
 header {
     display: flex;
     justify-content: center;
@@ -68,7 +70,6 @@ h1 {
 @media screen and (max-width: 768px) {
     .messagebar {
         padding: 10px;
-        margin: 10px;
         font-size: 16px;
     }
 }

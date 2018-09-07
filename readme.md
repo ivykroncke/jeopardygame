@@ -2,7 +2,7 @@
 
 This game is a playful take on Jeopardy, quizzing players with dog trivia and entertaining them with frivolous dog noises. 
 
-Live site: (href)
+Live site: (https://stoic-goldstine-92d849.netlify.com/)
 
 ## Technologies Used
 
