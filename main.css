@@ -2,7 +2,6 @@ body {
     height: 100%;
     font-family: 'Open Sans';
     background: url('visual/sketch-bg.png') repeat  rgb(149, 219, 240);
-
 }
 
 #sitewrapper {
@@ -56,6 +55,10 @@ h1 {
     padding: 15px 15% 15px 15%;
 
     /* -webkit-transition: height 2s; */
+}
+
+.question {
+    color: rgb(38, 218, 218)
 }
 
 @media screen and (max-width: 768px) {
